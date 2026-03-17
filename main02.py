@@ -77,4 +77,21 @@ def cadastrar():
             session.rollback()
             print(f"Ocorreu um erro {erro}")
 
-cadastrar()
+# cadastrar()
+
+def atualizar():
+    with Session() as session:
+        try:
+            sushi = session.query(Restaurante).filter_by(nome="Sushi do bom").first()
+            pudim = session.query(Prato).filter_by(nome="Lasanha").first()
+            print(f"\nAntes - Pudim pertence a {pudim.restaurante.nome}")
+            pudim.restaurante = sushi
+            session.commit()
+            print(f"Depois - Pudim pertence a {pudim.restaurante.nome}")
+
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
+
+# atualizar()
+
