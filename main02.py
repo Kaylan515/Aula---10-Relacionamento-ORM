@@ -104,3 +104,21 @@ def excluir():
     except Exception as erro:
         Session.rollback()
         print(f"Ocorreu um erro {erro}")
+
+# excluir()
+
+def listar():
+    with Session() as session:
+        try:
+            restaurantes = session.query(Restaurante).all()
+            for rest in restaurantes:
+                print(f"\n{rest.nome} - R$ {rest.cidade}")
+            
+            print("\nPratos:")
+            pratos = session.query(Prato).all()
+            for prato in pratos:
+                print(f"\n{prato.nome} - R$ {prato.preco}")
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
+listar()
