@@ -95,3 +95,12 @@ def atualizar():
 
 # atualizar()
 
+def excluir():
+    try:
+        buscar_restaurante = Session().query(Restaurante).filter_by(nome="Cantina do Zé").first()
+        Session.delete(buscar_restaurante)
+        Session.commit()
+        print("Restaurante excluído")
+    except Exception as erro:
+        Session.rollback()
+        print(f"Ocorreu um erro {erro}")
